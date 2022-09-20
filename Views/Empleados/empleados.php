@@ -1,6 +1,6 @@
 <?php
  headerAdmin($data); 
- //getModal('modalCategorias', $data);
+ getModal('modalEmpleados', $data);
  
  
  ?>
@@ -22,7 +22,7 @@
             <div class="tile">
               <div class="tile-body">
                 <div class="table-responsive">
-                  <table class="table table-hover table-bordered" id="tableCategorias">
+                  <table class="table table-hover table-bordered" id="tableEmpleados">
                     <thead>
                       <tr>
                         <th>#</th>
