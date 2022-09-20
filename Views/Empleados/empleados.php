@@ -25,12 +25,11 @@
                   <table class="table table-hover table-bordered" id="tableEmpleados">
                     <thead>
                       <tr>
-                        <th>#</th>
                         <th>Nombres</th>
                         <th>Email</th>
                         <th>Sexo</th>
+                        <th>Área</th>
                         <th>Boletin</th>
-                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>      

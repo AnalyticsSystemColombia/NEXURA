@@ -12,12 +12,11 @@ document.addEventListener('DOMContentLoaded', function(){
             "dataSrc":""
         },
         "columns":[
-            {"data":"id"},
             {"data":"nombre"},
             {"data":"email"},
+            {"data":"sexo"},
             {"data":"area_id"},
             {"data":"boletin"},
-            {"data":"options"}
         ],
         "resonsieve":"true",
         "bDestroy": true,
