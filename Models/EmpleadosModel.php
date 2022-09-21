@@ -30,6 +30,7 @@
          $request = $this->select_all($sql);
          return $request;
      }
+     
      public function insertEmpleado(string $nombre, string $email, string $sexo, int $area, string $descripcion, int $rol  ){
          $return = 0;
          $this->strNombre = $nombre;
@@ -72,6 +73,29 @@
 		$request = $this->update($sql,$arrData);
 		return $request;
 	  }	
+      public function updateEmpleados(int $id, string $nombre, string $email, string $sexo, int $area, string $descripcion){
+         $this->intId = $id;
+		 $this->strNombre = $nombre;
+		 $this->strEmail = $email;
+		 $this->strSexo = $sexo;
+		 $this->listArea = $area;
+		 $this->strDescripcion = $descripcion;
+		$sql ="SELECT * FROM empleado WHERE nombre = '{$this->strNombre}' AND id !=  $this->intId ";
+		$request = $this->select_all($sql);
+		if(empty($request)){
+			$sql = "UPDATE empleado SET nombre = ?, email = ?, sexo = ?, area_id= ?, descripcion = ? WHERE id = $this->intId";
+			$arrData =  array($this->strNombre,
+							  $this->strEmail,
+                              $this->strSexo,
+                              $this->listArea,
+                              $this->strDescripcion,
+                            );
+			$request = $this->update($sql,$arrData);
+		}else{
+			$request = "exist";
+		}
+		return $request;
+	}
 }
 
 ?>
