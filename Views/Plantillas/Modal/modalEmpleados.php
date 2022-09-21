@@ -1,4 +1,6 @@
-<!-- Modal -->
+<?php
+$arrRoles = $data['listRoles'];
+?>
 <div class="modal fade" id="modalEmpleados" tabindex="-1" role="dialog" aria-hidden="true">
   <div class="modal-dialog modal-lg" >
     <div class="modal-content">
@@ -16,19 +18,19 @@
                 <div class="col-md-6">
                     <div class="form-group">
                       <label class="control-label">Nombre completo <span class="required">*</span></label>
-                      <input class="form-control" id="txtNomb" name="txtNomb" type="text" placeholder="Nombre Completo del empleado" required="">
+                      <input class="form-control" id="txtNombre" name="txtNombre" type="text" placeholder="Nombre Completo del empleado" required="">
                     </div>
                     <div class="form-group">
                       <label class="control-label">Correo Electrónico <span class="required">*</span></label>
-                      <input class="form-control" id="txtNomb" name="txtNomb" type="text" placeholder="Correo Electrónico" required="">
+                      <input class="form-control" id="txtCorreo" name="txtCorreo" type="text" placeholder="Correo Electrónico" required="">
                     </div>
                 </div>
                 <div class="col-md-6">
                      <div class="form-group">
                         <label class="control-label">Sexo <span class="required">*</span></label>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                          <label class="form-check-label" for="flexRadioDefault1">
+                          <input class="form-check-input" type="radio" name="radSexo" id="radSexo">
+                          <label class="form-check-label" for="radSexo">
                           Masculino
                         </label>
                      </div>
@@ -40,8 +42,8 @@
                       </div>
                  </div>
                     <div class="form-group">
-                            <label for="listCategoria">Área<span class="required">*</span></label>
-                            <select class="form-control"  id="listCategoria" name="listCategoria"></select>
+                            <label for="listAreas">Área<span class="required">*</span></label>
+                            <select class="form-control"  id="listAreas" name="listAreas"></select>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -50,33 +52,18 @@
                       <textarea class="form-control" id="txtDesc" name="txtDesc" rows="2" placeholder="Descripción de la experiencia del empleado" required=""></textarea>
                     </div> 
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                      <label class="control-label">Roles<span class="required">*</span></label>
-                        <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value="" id="flexCheckIndeterminateDisabled" disabled>
-                            <label class="form-check-label" for="flexCheckIndeterminateDisabled">
-                              Deseo recibir boletín informativo
-                            </label>
-                        </div>
-                      <div class="form-check">
-                          <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled>
-                          <label class="form-check-label" for="flexCheckDisabled">
-                            Profesional de proyectos-Desarrollador
-                          </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked disabled>
-                            <label class="form-check-label" for="flexCheckCheckedDisabled">
-                              Gerente extratégico
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckCheckedDisabled" checked disabled>
-                            <label class="form-check-label" for="flexCheckCheckedDisabled">
-                              Auxiliar administrativo
-                            </label>
-                        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                      <label class="control-label" for="listRoles">Roles<span class="required">*</span></label>
+                      <br>
+                       <?php 
+                       foreach ($arrRoles as  $roles) { ?>
+                       <div class="form-check">
+                          
+                          <input class="form-check-input" type="checkbox" value="<?= $roles['id'] ?>" id="listRoles" name="listRoles">
+                          <label class="control-label" for="listRoles"><?= $roles['nombre'] ?></label>
+                       </div>
+                       <?php } ?>
                      </div>
                 </div>
                 </div>

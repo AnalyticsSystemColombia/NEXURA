@@ -22,8 +22,88 @@ document.addEventListener('DOMContentLoaded', function(){
         "bDestroy": true,
         "iDisplayLength": 10,
         "order":[[0,"desc"]]  
+
     });
+
+    window.addEventListener('load', function() {
+        if(document.querySelector("#formEmpleados")){
+            let formEmpleados = document.querySelector("#formEmpleados");
+            formEmpleados.onsubmit = function(e) {
+                e.preventDefault();
+                let strNombre = document.querySelector('#txtNombre').value;
+                let strCorreo = document.querySelector('#txtCorreo').value;
+                let checkbox = document.querySelector('#checkbox').value;
+                let listCategoria = document.querySelector('#listCategoria').value;
+                let intStatus = document.querySelector('#listStatus').value;
+                
+                if(strNombre == '' || txtCorreo == '' || strUrl == '' || listCategoria == '' )
+                {
+                    swal("Atención", "Todos los campos son obligatorios." , "error");
+                    return false;
+                }
+                let request = (window.XMLHttpRequest) ? 
+                                new XMLHttpRequest() : 
+                                new ActiveXObject('Microsoft.XMLHTTP');
+                let ajaxUrl = base_url+'/empleados/setEmpleado'; 
+                let formData = new FormData(formEmpleados);
+                request.open("POST",ajaxUrl,true);
+                request.send(formData);
+                request.onreadystatechange = function(){
+                    if(request.readyState == 4 && request.status == 200){
+                        let objData = JSON.parse(request.responseText);
+                        if(objData.status)
+                    {
+                       tableEmmpleados.api().ajax.reload();
+                        $('#modalEmpleados').modal("hide");
+                        formEmpleados.reset();
+                        swal("Sitios", objData.msg ,"success");
+                    }else{
+                        swal("Error", objData.msg , "error");
+                    } 
+                    }
+                    return false;
+                }
+            }
+        }
+        fntAreas();
+        fntRoles();
+    }, false);
+
 });
+
+
+function fntAreas(){
+    if(document.querySelector('#listAreas')){
+        let ajaxUrl = base_url+'/empleados/getSelectAreas';
+        let request = (window.XMLHttpRequest) ? 
+                    new XMLHttpRequest() : 
+                    new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET",ajaxUrl,true);
+        request.send();
+        request.onreadystatechange = function(){
+            if(request.readyState == 4 && request.status == 200){
+                document.querySelector('#listAreas').innerHTML = request.responseText;
+            }
+        }
+    }
+}
+
+function fntRoles(){
+    if(document.querySelector('#listRoles')){
+        let ajaxUrl = base_url+'/empleados/getRoles';
+        let request = (window.XMLHttpRequest) ? 
+                    new XMLHttpRequest() : 
+                    new ActiveXObject('Microsoft.XMLHTTP');
+        request.open("GET",ajaxUrl,true);
+        request.send();
+        request.onreadystatechange = function(){
+            if(request.readyState == 4 && request.status == 200){
+                document.querySelector('#listRoles').innerHTML = request.responseText;
+            }
+        }
+    }
+}
+
 
 function openModal(){
     rowTable = "";
