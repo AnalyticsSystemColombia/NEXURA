@@ -29,14 +29,14 @@ $arrRoles = $data['listRoles'];
                      <div class="form-group">
                         <label class="control-label">Sexo <span class="required">*</span></label>
                         <div class="form-check">
-                          <input class="form-check-input" type="radio" name="radSexo" id="radSexo">
+                          <input class="form-check-input" type="radio" value="M" name="radSexo" id="radSexo">
                           <label class="form-check-label" for="radSexo">
                           Masculino
                         </label>
                      </div>
                       <div class="form-check">
-                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2" checked>
-                          <label class="form-check-label" for="flexRadioDefault2">
+                          <input class="form-check-input" type="radio" value="F" name="radSexo" id="radSexo">
+                          <label class="form-check-label" for="radSexo">
                           Femenino
                         </label>
                       </div>

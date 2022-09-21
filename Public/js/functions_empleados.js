@@ -32,11 +32,13 @@ document.addEventListener('DOMContentLoaded', function(){
                 e.preventDefault();
                 let strNombre = document.querySelector('#txtNombre').value;
                 let strCorreo = document.querySelector('#txtCorreo').value;
-                let checkbox = document.querySelector('#checkbox').value;
-                let listCategoria = document.querySelector('#listCategoria').value;
-                let intStatus = document.querySelector('#listStatus').value;
+                let intSexo = document.querySelector('#radSexo').value;
+                let intArea = document.querySelector('#listAreas').value;
+                let strDescripcion = document.querySelector('#txtDesc').value;
+                let intlistRoles = document.querySelector('#listRoles').value;
                 
-                if(strNombre == '' || txtCorreo == '' || strUrl == '' || listCategoria == '' )
+                if(strNombre == '' || strCorreo == '' || intSexo == '' || listAreas == '' 
+                || intArea == '' || strDescripcion=='' || intlistRoles == '' )
                 {
                     swal("Atención", "Todos los campos son obligatorios." , "error");
                     return false;
@@ -44,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function(){
                 let request = (window.XMLHttpRequest) ? 
                                 new XMLHttpRequest() : 
                                 new ActiveXObject('Microsoft.XMLHTTP');
-                let ajaxUrl = base_url+'/empleados/setEmpleado'; 
+                let ajaxUrl = base_url+'/empleados/setEmpleados'; 
                 let formData = new FormData(formEmpleados);
                 request.open("POST",ajaxUrl,true);
                 request.send(formData);
@@ -56,7 +58,7 @@ document.addEventListener('DOMContentLoaded', function(){
                        tableEmmpleados.api().ajax.reload();
                         $('#modalEmpleados').modal("hide");
                         formEmpleados.reset();
-                        swal("Sitios", objData.msg ,"success");
+                        swal("Empleados", objData.msg ,"success");
                     }else{
                         swal("Error", objData.msg , "error");
                     } 
