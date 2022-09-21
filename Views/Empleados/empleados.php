@@ -30,6 +30,7 @@
                         <th>Sexo</th>
                         <th>Área</th>
                         <th>Boletin</th>
+                        <th>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>      

@@ -17,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function(){
             {"data":"sexo"},
             {"data":"area_id"},
             {"data":"boletin"},
+            {"data": "options"}
         ],
         "resonsieve":"true",
         "bDestroy": true,
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function(){
         "order":[[0,"desc"]]  
 
     });
-
+});
     window.addEventListener('load', function() {
         if(document.querySelector("#formEmpleados")){
             let formEmpleados = document.querySelector("#formEmpleados");
@@ -71,8 +72,72 @@ document.addEventListener('DOMContentLoaded', function(){
         fntRoles();
     }, false);
 
-});
+    function fntDelInfo(id){
+        swal({
+            title: "Eliminar Empleado",
+            text: "¿Realmente quiere eliminar la empleado?",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Si, eliminar!",
+            cancelButtonText: "No, cancelar!",
+            closeOnConfirm: false,
+            closeOnCancel: true
+        }, function(isConfirm) {    
+            if (isConfirm) 
+            {
+                let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+                let ajaxUrl = base_url+'/empleados/delEmpleado';
+                let strData = "id="+id;
+                request.open("POST",ajaxUrl,true);
+                request.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                request.send(strData);
+                request.onreadystatechange = function(){
+                    if(request.readyState == 4 && request.status == 200){
+                        let objData = JSON.parse(request.responseText);
+                        if(objData.status)
+                        {
+                            swal("Eliminar!", objData.msg , "success");
+                            tableSitios.api().ajax.reload();
+                        }else{
+                            swal("Atención!", objData.msg , "error");
+                        }
+                    }
+                }
+            }
+    
+        });
+    }
 
+    function fntEditInfo(element,id){
+        rowTable = element.parentNode.parentNode.parentNode;
+        document.querySelector('#titleModal').innerHTML ="Actualizar Empleado";
+        document.querySelector('.modal-header').classList.replace("headerRegister", "headerUpdate");
+        document.querySelector('#btnActionForm').classList.replace("btn-primary", "btn-info");
+        document.querySelector('#btnText').innerHTML ="Actualizar";
+        let request = (window.XMLHttpRequest) ? new XMLHttpRequest() : new ActiveXObject('Microsoft.XMLHTTP');
+        let ajaxUrl = base_url+'/empleados/getEmpleado/'+id;
+        request.open("GET",ajaxUrl,true);
+        request.send();
+        request.onreadystatechange = function(){
+            if(request.readyState == 4 && request.status == 200){
+                let objData = JSON.parse(request.responseText);
+                if(objData.status)
+                {
+                    document.querySelector("#id").value = objData.data.id;
+                    document.querySelector("#txtNombre").value = objData.data.nombre;
+                    document.querySelector("#txtCorreo").value = objData.data.email;
+                    document.querySelector("#radSexo").value = objData.data.sexo; 
+                    document.querySelector("#listAreas").value = objData.data.area_id; 
+                    document.querySelector("#txtDesc").value = objData.data.descripcion; 
+                    document.querySelector("#listRoles").value = objData.data.boletin;  
+                    $('#modalEmpleados').modal('show');
+    
+                }else{
+                    swal("Error", objData.msg , "error");
+                }
+            }
+        }
+    }
 
 function fntAreas(){
     if(document.querySelector('#listAreas')){
@@ -105,6 +170,8 @@ function fntRoles(){
         }
     }
 }
+
+
 
 
 function openModal(){

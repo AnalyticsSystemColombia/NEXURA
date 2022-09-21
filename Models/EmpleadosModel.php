@@ -56,9 +56,22 @@
 			$return = "exist";
 		}
 		return $return;
-
-
      }
+
+     public function selectEmpleado($id){
+        $this->intId = $id;
+		$sql = "SELECT nombre, sexo, area_id, email, descripcion FROM empleado 
+        WHERE id = $this->intId";
+		$request = $this->select($sql);
+		return $request;
+     }
+     public function deleteEmpleado(int $id){
+		$this->intId = $id;
+		$sql = "UPDATE empleado SET status = ? WHERE id = $this->intId ";
+		$arrData = array(0);
+		$request = $this->update($sql,$arrData);
+		return $request;
+	  }	
 }
 
 ?>
